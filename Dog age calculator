@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dog Age Calculator | Healthy Dog Hub</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+    .container {
+      background: #fff;
+      padding: 40px 60px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+    h2 {
+      color: #4CAF50;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      font-size: 16px;
+      margin: 15px 0 5px;
+      text-align: left;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+    input, select {
+      color: #333;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      font-size: 1.2em;
+      color: #333;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .share-btn {
+      background-color: #1d72b8;
+      color: white;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .share-btn:hover {
+      background-color: #155a8a;
+    }
+    .social-share {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .social-share a {
+      text-decoration: none;
+      font-size: 20px;
+      color: #333;
+    }
+    .social-share a:hover {
+      color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Dog Age to Human Years Calculator</h2>
+    <label for="dogAge">Dog's Age (in years):</label>
+    <input type="number" id="dogAge" min="0" step="0.1" required placeholder="Enter dog's age" />
+
+    <label for="dogBreed">Select Dog Breed:</label>
+    <select id="dogBreed">
+      <option value="small">Small (under 20 lbs)</option>
+      <option value="medium">Medium (21–50 lbs)</option>
+      <option value="large">Large (over 50 lbs)</option>
+    </select>
+
+    <button onclick="calculateHumanAge()">Calculate</button>
+
+    <div id="result" class="result"></div>
+
+    <div id="shareResult" class="social-share" style="display: none;">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank">Facebook</a>
+      <a href="https://twitter.com/intent/tweet?url=" target="_blank">Twitter</a>
+      <a href="https://api.whatsapp.com/send?text=" target="_blank">WhatsApp</a>
+    </div>
+
+  </div>
+
+  <script>
+    function calculateHumanAge() {
+      const age = parseFloat(document.getElementById('dogAge').value);
+      const breed = document.getElementById('dogBreed').value;
+      let humanAge = 0;
+
+      if (isNaN(age) || age <= 0) {
+        document.getElementById('result').innerText = "Please enter a valid dog age.";
+        return;
+      }
+
+      if (age <= 2) {
+        humanAge = age * 12.5;
+      } else {
+        switch (breed) {
+          case 'small':
+            humanAge = 25 + (age - 2) * 4.5;
+            break;
+          case 'medium':
+            humanAge = 25 + (age - 2) * 5.5;
+            break;
+          case 'large':
+            humanAge = 25 + (age - 2) * 7;
+            break;
+        }
+      }
+
+      document.getElementById('result').innerText = `Your dog's age is approximately ${humanAge.toFixed(1)} human years.`;
+
+      // Show share buttons after calculating
+      document.getElementById('shareResult').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>
